@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Background Removal Tool</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="app-header">
+    <div class="header-inner">
+      <span class="header-icon">🖼</span>
+      <h1 class="header-title">Background Removal Tool</h1>
+      <span class="header-subtitle">Local AI · No uploads to third parties</span>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="app-main">
+
+    <!-- Upload Zone -->
+    <section class="upload-section" id="uploadSection">
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-zone__icon">📂</div>
+        <p class="drop-zone__text">Drop images here or <span class="drop-zone__link">click to browse</span></p>
+        <p class="drop-zone__hint">jpg · jpeg · png · webp &nbsp;·&nbsp; max 25 MB each &nbsp;·&nbsp; up to 50 files</p>
+        <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp" multiple hidden />
+      </div>
+
+      <!-- Validation errors shown inline -->
+      <div id="validationErrors" class="validation-errors" hidden></div>
+
+      <div class="upload-actions">
+        <button id="removeBtn" class="btn btn--primary" disabled>
+          ✨ Remove Backgrounds
+        </button>
+        <button id="downloadAllBtn" class="btn btn--secondary" hidden>
+          ⬇ Download All as ZIP
+        </button>
+      </div>
+    </section>
+
+    <!-- Progress bar -->
+    <section class="progress-section" id="progressSection" hidden>
+      <div class="progress-label">
+        <span id="progressText">Processing…</span>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progressBarFill" style="width:0%"></div>
+      </div>
+    </section>
+
+    <!-- Image Card Grid -->
+    <section class="cards-section">
+      <div class="card-grid" id="cardGrid"></div>
+    </section>
+
+    <!-- Processing Summary Panel -->
+    <section class="summary-panel" id="summaryPanel" hidden>
+      <div class="summary-inner">
+        <span class="summary-title">📊 Processing Summary</span>
+        <div class="summary-stats">
+          <span class="stat">Total: <strong id="sumTotal">0</strong></span>
+          <span class="stat stat--ok">✓ Completed: <strong id="sumCompleted">0</strong></span>
+          <span class="stat stat--err">✗ Failed: <strong id="sumFailed">0</strong></span>
+          <span class="stat stat--skip">⊘ Skipped: <strong id="sumSkipped">0</strong></span>
+        </div>
+        <button class="summary-close" id="summaryClose">✕ Close</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== SCRIPTS (order matters) ===== -->
+  <script th:src="@{/js/imageCard.js}"></script>
+  <script th:src="@{/js/poller.js}"></script>
+  <script th:src="@{/js/uploader.js}"></script>
+  <script th:src="@{/js/app.js}"></script>
+</body>
+</html>
